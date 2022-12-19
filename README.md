@@ -117,4 +117,6 @@ Some data is pre-entered on system loading to make testing easier.
 #### Logging
 The system uses Aspect Oriented Programming (AOP) to analyze and record the behavior of methods in controllers, services and repositories. As well as the errors produced in the system.
 A log file (sibs.log) is created that contains all the important events referring to the analyzed methods.
+User can download log file from endpoint **/api/v1/admin/log**AspectJ + Logback were used to introduce Aspect Oriented Programming (AOP) and logging capability to the system.
+The behavior and errors of methods in controllers, services and repositories are analyzed and recorded in the file.
 User can download log file from endpoint **/api/v1/admin/log**
