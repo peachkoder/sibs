@@ -12,14 +12,15 @@ API where users can create and manage orders. Items can be ordered and orders ar
 
 ## Tech Stack
 
-**Server:** Java8, Spring Boot, Spring  JPA, Hibernate, PostgreSQL, MySQL, LogBack, AspectJ.
+**Server:** Java8, Spring Boot, Spring  JPA, Hibernate, PostgreSQL, MySQL, LogBack, AspectJ, Postman.
 
 
 ## Table of Contents
 - Features Demanded
 - Documentation
   - API Reference
-  - About
+  - Introduction
+  - Persistence
   - Logging
  
 ## Features Demanded
