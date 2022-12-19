@@ -1,0 +1,58 @@
+<configuration>
+	<property name="FILE_NAME" value="sibs" />
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${FILE_NAME}.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%-4relative - %d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} -
+				%msg%n
+			</pattern>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${FILE_NAME}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+
+			<!-- keep 30 days' worth of history capped at 3GB total size -->
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1KB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+<!-- 	<appender name="EMAIL" -->
+<!-- 		class="ch.qos.logback.classic.net.SMTPAppender"> -->
+<!-- 		<smtpHost>OUR-SMTP-HOST-ADDRESS</smtpHost> -->
+<!-- 		<to>EMAIL-RECIPIENT-1</to> -->
+<!-- 		<to>EMAIL-RECIPIENT-2</to> -->
+<!-- 		<from>SENDER-EMAIL-ADDRESS</from> -->
+<!-- 		<subject>SIBS: %logger{20} - %msg</subject> -->
+<!-- 		<layout class="ch.qos.logback.classic.PatternLayout"> -->
+<!-- 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n -->
+<!-- 			</pattern> -->
+<!-- 		</layout> -->
+<!-- 	</appender> -->
+
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.peachkoder.logger" level="DEBUG" additivity="false">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="com.peachkoder.email" level="WARN" additivity="false">
+		<!-- <appender-ref ref="EMAIL" /> -->
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="ERROR">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>
