@@ -18,10 +18,10 @@ API where users can create and manage orders. Items can be ordered and orders ar
 ## Table of Contents
 - Features Demanded
 - Documentation
-  - API Reference
   - Introduction
   - Persistence
   - Logging
+  - API Reference
  
 ## Features Demanded
 
@@ -39,6 +39,26 @@ API where users can create and manage orders. Items can be ordered and orders ar
 
 - Write a log file with: orders completed, stock movements, email sent and errors.
 ## Documentation
+
+### Introduction 
+The system relates orders to inventory movements.
+When entering the order, the system looks for stock movements that have the same item as the order.
+
+If the stock movement has a smaller quantity than the order, this stock movement is blocked and becomes part of the order. Blocked stock movements can no longer be part of other orders.
+
+If the stock movement has a quantity greater than the order, then it is divided, generating a new stock movement with the same quantity as the order. This new stock movement is blocked and becomes part of the order. The original movement is free to be part of other orders, but with less quantity available.
+
+When a stock movement is entered, the system looks for incomplete orders. The behavior follows the same way described above.
+
+#### Persistence
+The persistence layer is composed of JPA repositories and entities managed by Hibernate.
+Some data is pre-entered on system loading to make testing easier.
+
+#### Logging
+The system uses Aspect Oriented Programming (AOP) to analyze and record the behavior of methods in controllers, services and repositories. As well as the errors produced in the system.
+A log file (sibs.log) is created that contains all the important events referring to the analyzed methods.
+User can download log file from endpoint **/api/v1/admin/log**
+
 ### API Reference
 The API has been divided in 4 RestControllers. 
 
@@ -100,21 +120,3 @@ Functions/Rest verb table:
 | :--------  | :-------- | :-------- | :------- | :------------------------- |
 | `get log file` | `/log` |   |   | Log file download| 
 
-### Introduction 
-The system relates orders to inventory movements.
-When entering the order, the system looks for stock movements that have the same item as the order.
-
-If the stock movement has a smaller quantity than the order, this stock movement is blocked and becomes part of the order. Blocked stock movements can no longer be part of other orders.
-
-If the stock movement has a quantity greater than the order, then it is divided, generating a new stock movement with the same quantity as the order. This new stock movement is blocked and becomes part of the order. The original movement is free to be part of other orders, but with less quantity available.
-
-When a stock movement is entered, the system looks for incomplete orders. The behavior follows the same way described above.
-
-#### Persistence
-The persistence layer is composed of JPA repositories and entities managed by Hibernate.
-Some data is pre-entered on system loading to make testing easier.
-
-#### Logging
-AspectJ + Logback were used to introduce Aspect Oriented Programming (AOP) and logging capability to the system.
-The behavior and errors of methods in controllers, services and repositories are analyzed and recorded in the file.
-User can download log file from endpoint **/api/v1/admin/log**
