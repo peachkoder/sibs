@@ -44,7 +44,7 @@ public class ItemController {
 	}
 
 	@PostMapping("/{name}")
-	private ResponseEntity<?> createItem(@PathVariable String name) {
+	private ResponseEntity<?> create(@PathVariable String name) {
 
 		Item item = itemService.createItem(name);
 
@@ -52,14 +52,14 @@ public class ItemController {
 	}
 
 	@PutMapping()
-	private ResponseEntity<?> updateItem(@RequestBody Item item) {
+	private ResponseEntity<?> update(@RequestBody Item item) {
 		Item updated = itemService.update(item);
 		
 		return ResponseEntity.ok(updated);
 	}
 
 	@DeleteMapping()
-	private ResponseEntity<?> deleteItem(@RequestBody Item item) {
+	private ResponseEntity<?> delete(@RequestBody Item item) {
 		itemService.delete(item);
 		return ResponseEntity.ok().build();
 	}

@@ -43,7 +43,7 @@ public class StockMovementController {
 	}
 
 	@PostMapping()
-	private ResponseEntity<?> createOrder(@RequestBody StockMovementDto movementDto) {
+	private ResponseEntity<?> create(@RequestBody StockMovementDto movementDto) {
 
 		StockMovement movement = stockMovementService.createMovement(movementDto.getItem(), movementDto.getQuantity());
 
@@ -51,13 +51,13 @@ public class StockMovementController {
 	}
 
 	@PutMapping()
-	private ResponseEntity<?> updateOrder(@RequestBody StockMovement movement) {
+	private ResponseEntity<?> update(@RequestBody StockMovement movement) {
 
 		return stockMovementService.update(movement) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
 	}
 
 	@DeleteMapping()
-	private ResponseEntity<?> deleteOrder(@RequestBody StockMovement movement) {
+	private ResponseEntity<?> delete(@RequestBody StockMovement movement) {
 		stockMovementService.delete(movement);
 		return ResponseEntity.ok().build();
 	}

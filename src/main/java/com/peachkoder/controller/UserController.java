@@ -50,7 +50,7 @@ public class UserController {
 	}
 
 	@PostMapping
-	private ResponseEntity<?> createUser(@RequestParam String name, @RequestParam String email) {
+	private ResponseEntity<?> create(@RequestParam String name, @RequestParam String email) {
 
 		User user = service.createItem(name, email);
 
@@ -58,13 +58,13 @@ public class UserController {
 	}
 
 	@PutMapping
-	private ResponseEntity<?> updateUser(@RequestBody User user) {
+	private ResponseEntity<?> update(@RequestBody User user) {
 		User updated = service.update(user);
 		return ResponseEntity.ok(updated);
 	}
 
 	@DeleteMapping
-	private ResponseEntity<?> deleteUser(@RequestBody User user) {
+	private ResponseEntity<?> delete(@RequestBody User user) {
 
 		return service.delete(user) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
 
